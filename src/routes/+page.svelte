@@ -1,8 +1,11 @@
 <script type="ts">
     import { goto } from "$app/navigation";
+    import { user } from "../store";
 
     $effect(() => {
-        goto("/login", { replaceState: true });
+        if (!$user.name) {
+            goto("/login", { replaceState: true });
+        }
     });
 </script>
 

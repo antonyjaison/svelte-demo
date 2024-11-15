@@ -10,6 +10,11 @@
 		password: string;
 	};
 
+	type AuthType = {
+		name: string;
+		icon: string;
+	};
+
 	let { username, password }: FormType = $state({
 		username: '',
 		password: ''
@@ -17,10 +22,7 @@
 
 	let error: string = $state('');
 
-	let authProviders: {
-		name: string;
-		icon: string;
-	}[] = [
+	let authProviders: AuthType[] = [
 		{
 			name: 'Google',
 			icon: '/icons/google.svg'
@@ -44,16 +46,16 @@
 		if (username === 'john1999' && password === '123456') {
 			error = '';
 			console.log('Logged in');
-			goto(username, { replaceState: true });
+			user.set({ username, name: 'John Doe' });
+			goto("user/" + username , { replaceState: true });
 		} else {
 			error = 'Invalid username or password';
 		}
 	}
 
 	// $effect(() => {
-	// 	goto('/' , { replaceState: true });
-	// })
-
+	// 	goto('/user/hello');
+	// });
 </script>
 
 <main class="container flex h-screen w-full items-center justify-center">
@@ -82,7 +84,7 @@
 						'border-red-300': error && password === ''
 					})}
 				/>
-				<a href="" class=" text-xs text-gray-500 underline"> Forgot password? </a>
+				<a href="/" class=" text-xs text-gray-500 underline"> Forgot password? </a>
 			</div>
 
 			{#if error}

@@ -4,6 +4,8 @@
 	import { Label } from '$lib/components/ui/label';
 	import { cn } from '$lib/utils';
 	import { goto } from '$app/navigation';
+	import { user } from '../../store';
+	import { enhance } from '$app/forms';
 
 	type FormType = {
 		username: string;
@@ -53,13 +55,10 @@
 		}
 	}
 
-	// $effect(() => {
-	// 	goto('/user/hello');
-	// });
 </script>
 
 <main class="container flex h-screen w-full items-center justify-center">
-	<form {onsubmit} class=" w-full rounded-lg border px-5 py-5 shadow-md lg:w-80">
+	<form {onsubmit} method="POST" class=" w-full rounded-lg border px-5 py-5 shadow-md lg:w-80" use:enhance>
 		<h2 class=" text-4xl">Log in</h2>
 		<div class=" mt-6 flex flex-col gap-4">
 			<div>
